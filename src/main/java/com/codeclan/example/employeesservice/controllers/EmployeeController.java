@@ -3,12 +3,10 @@ package com.codeclan.example.employeesservice.controllers;
 import com.codeclan.example.employeesservice.models.Employee;
 import com.codeclan.example.employeesservice.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class EmployeeController {
@@ -19,6 +17,11 @@ public class EmployeeController {
     @GetMapping(value = "/employees")
     public List<Employee> getAllEmployees(){
         return employeeRepository.findAll();
+    }
+
+    @GetMapping(value = "/employees/{id}")
+    public Optional<Employee> getEmployee(@PathVariable Long id){
+        return employeeRepository.findById(id);
     }
 
     @PostMapping(value = "/employees")
